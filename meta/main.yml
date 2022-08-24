@@ -1,0 +1,42 @@
+galaxy_info:
+  author: Sebastian Wagner
+  description: Installing and setting up the Hockeypuck OpenPGP key server
+  company: Intevation GmbH
+
+  license: BSD-3-Clause
+
+  min_ansible_version: 2.1
+
+  # Basically all versions supported by https://galaxy.ansible.com/gantsign/golang
+  platforms:
+    - name: EL
+      versions:
+        - 8
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+        - focal
+    - name: Debian
+      versions:
+        - buster
+        - stretch
+        - bullseye
+    - name: Fedora
+      versions:
+        - 35
+    - name: opensuse
+      versions:
+        - 15.3
+
+  galaxy_tags: []
+    - web
+    - pgp
+    - openpgp
+    - hkp
+    - sks
+    - golang
+    - hockeypuck
+
+dependencies:
+  - gantsign.golang
