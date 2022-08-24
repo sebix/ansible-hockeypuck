@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2022 Intevation GmbH
+# SPDX-License-Identifier: BSD-3-Clause
+---
 galaxy_info:
   role_name: hockeypuck
   author: Sebastian Wagner

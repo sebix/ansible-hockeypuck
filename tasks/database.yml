@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2022 Intevation GmbH
-# https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html
+# SPDX-License-Identifier: BSD-3-Clause
 # psycopg2 is required for ansible itself
 ---
 - name: install postgresql and psycopg2

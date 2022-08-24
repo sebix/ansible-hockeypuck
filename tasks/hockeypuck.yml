@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2022 Intevation GmbH
+# SPDX-License-Identifier: BSD-3-Clause
 ---
 - name: install gcc
   package:
