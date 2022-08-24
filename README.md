@@ -17,7 +17,7 @@ Role Variables
 --------------
 
 List of variables with their defaults:
-```
+```yaml
 hockeypuck_home: /var/lib/hockeypuck
 hockeypuck_directory: "{{ hockeypuck_home }}/hockeypuck/"
 hockeypuck_hostname: "{{ hostname }}"
@@ -30,7 +30,29 @@ hockeypuck_logfile: /var/log/hockeypuck/hockeypuck.log
 hockeypuck_loglevel: INFO
 hockeypuck_recondb: "{{ hockeypuck_home }}/recon.db"
 hockeypuck_log_request_details: "true"
+hockeypuck_peers: []
 ```
+
+### Peers
+
+`hockeypuck_peers` can either be a simple list:
+```yaml
+- example.com
+- example.net
+```
+which assumes the same address for http and recon, as well as the default ports 11370 and 11371. The peer name will be `peer$index`.
+
+Or, `hockeypuck_peers` can be a mapping:
+```yaml
+- name: simple example
+  host: example.com
+- name: full example
+  http_addr: example.net
+  http_addr_port: 11371
+  recon_addr: example.net
+  recon_addr: 11370
+```
+The ports are optional.
 
 Dependencies
 ------------

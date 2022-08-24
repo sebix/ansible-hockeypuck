@@ -34,8 +34,14 @@ path="{{ hockeypuck_recondb }}"
 {% if hockeypuck_peers is defined %}
 
 {% for peer in hockeypuck_peers -%}
+{% if peer is mapping %}
+[hockeypuck.conflux.recon.partner.{{ peer.name }}]
+httpAddr="{{ peer.http_addr }}:{{ peer.http_addr_port|d(11371) }}"
+reconAddr="{{ peer.recon_addr }}:{{ peer.recon_addr_port|d(11370) }}"
+{% else %}
 [hockeypuck.conflux.recon.partner.peer{{ loop.index0 }}]
 httpAddr="{{ peer }}:11371"
 reconAddr="{{ peer }}:11370"
+{% endif %}
 {% endfor -%}
 {% endif %}
