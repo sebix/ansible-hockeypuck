@@ -40,4 +40,4 @@ galaxy_info:
     - hockeypuck
 
 dependencies:
-  - gantsign.golang
+  - role: gantsign.golang

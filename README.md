@@ -12,7 +12,6 @@ systemd is used for managing the server.
 Requirements
 ------------
 
-Install go on the server, e.g. with [`gantsign.golang`](https://galaxy.ansible.com/gantsign/golang).
 
 Role Variables
 --------------
@@ -36,23 +35,23 @@ hockeypuck_log_request_details: "true"
 Dependencies
 ------------
 
+Installs go on the server with [`gantsign.golang`](https://galaxy.ansible.com/gantsign/golang).
 
 Example Playbook
 ----------------
 
     - hosts: servers
       roles:
-        - golang.gantsign
         - sebix.hockeypuck
       vars:
+         # optional variables, see above for a complete list, including default values
         - golang_version: 1.19
-        - hockeypuck_log_request_details: "false"
         - hockeypuck_contact: "YOUR_KEY_FINGERPRINT"
 
 License
 -------
 
-BSD-3-Claus
+BSD-3-Clause
 
 Author Information
 ------------------
