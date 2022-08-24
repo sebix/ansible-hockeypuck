@@ -13,3 +13,4 @@ hockeypuck_logfile: /var/log/hockeypuck/hockeypuck.log
 hockeypuck_loglevel: INFO
 hockeypuck_recondb: "{{ hockeypuck_home }}/recon.db"
 hockeypuck_log_request_details: "true"
+hockeypuck_sks_import_temporary_directory: /tmp

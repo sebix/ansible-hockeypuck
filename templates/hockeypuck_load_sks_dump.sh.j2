@@ -1,0 +1,45 @@
+#!/bin/bash
+# SPDX-FileCopyrightText: 2022 Intevation GmbH
+# SPDX-License-Identifier: BSD-3-Clause
+
+# https://github.com/SKS-Keyserver/sks-keyserver/wiki/KeydumpSources
+
+RSYNC=$(which rsync)
+WGET=$(which wget)
+SUDO=$(which sudo)
+SU=$(which su)
+HOCKEYPUCK_LOAD={{ hockeypuck_home }}/bin/hockeypuck-load
+SHA256SUM=$(which sha256sum)
+MKTEMP=$(which mktemp)
+
+set -eu -o pipefail
+
+WORKDIR=$($MKTEMP -d -p {{ hockeypuck_sks_import_temporary_directory }} hockeypuck_sks_import.XXXXX)
+
+function print_error {
+    systemctl start hockeypuck.service
+    echo "Import of SKS data failed. Temporary directory $WORKDIR has not been deleted and may contain data." >&2
+}
+trap print_error ERR
+
+pushd $WORKDIR
+if [[ -n $RSYNC && -x $RSYNC ]]; then
+    rsync -avr rsync://rsync.cyberbits.eu/sks/dump/ $WORKDIR
+elif [[ -n $RSYNC && -x $WGET ]]; then
+    wget -rc -e robots=off -np -nd -A pgp,txt,SHA256SUMS https://mirror.cyberbits.eu/sks/dump/
+else
+    echo "Neither wget nor rsync is installed. Install either of them. Exiting."
+    exit 2;
+fi
+$SHA256SUM --strict -c SHA256SUMS
+popd
+
+systemctl stop hockeypuck.service
+if [[ -n $SUDO && -x $SUDO ]]; then
+    $SUDO -u hockeypuck $HOCKEYPUCK_LOAD -config /etc/hockeypuck/hockeypuck.conf $WORKDIR/hkp-dump-*.pgp
+else
+    $SU - hockeypuck -c "$HOCKEYPUCK_LOAD -config /etc/hockeypuck/hockeypuck.conf $WORKDIR/hkp-dump-*.pgp"
+fi
+
+systemctl start hockeypuck.service
+rm -r $WORKDIR

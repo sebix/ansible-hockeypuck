@@ -95,6 +95,14 @@
   ansible.builtin.copy:
     src: logrotate
     dest: /etc/logrotate.d/
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: install sks import script
+  ansible.builtin.template:
+    src: hockeypuck_load_sks_dump.sh.j2
+    dest: /usr/local/bin/hockeypuck_load_sks_dump.sh
     mode: '0755'
     owner: root
     group: root
