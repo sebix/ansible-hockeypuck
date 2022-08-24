@@ -1,2 +1,10 @@
+# SPDX-FileCopyrightText: 2022 Intevation GmbH
 ---
-# handlers file for hockeypuck
+- name: reload hockeypuck
+  systemd:
+    name: hockeypuck
+    state: reloaded
+- name: restart hockeypuck
+  systemd:
+    name: hockeypuck
+    state: restarted

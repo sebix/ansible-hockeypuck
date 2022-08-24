@@ -1,0 +1,97 @@
+# SPDX-FileCopyrightText: 2022 Intevation GmbH
+---
+- name: install gcc
+  package:
+    name: gcc
+
+- name: create group hockeypuck
+  ansible.builtin.group:
+    name: hockeypuck
+- name: create user hockeypuck
+  ansible.builtin.user:
+    name: hockeypuck
+    comment: "The user running hockeypuck"
+    shell: /bin/bash
+    group: hockeypuck
+    password: "!"
+    home: "{{ hockeypuck_home }}"
+    system: yes
+    update_password: on_create
+
+- name: create hockeypuck logging directory
+  file:
+    state: directory
+    path: /var/log/hockeypuck
+    owner: hockeypuck
+    group: adm
+    mode: '0755'
+- name: create hockeypuck configuration directory
+  file:
+    state: directory
+    path: /etc/hockeypuck
+    owner: root
+    group: hockeypuck
+    mode: '0755'
+
+- name: clone hockeypuck repository
+  git:
+    repo: https://github.com/hockeypuck/hockeypuck
+    dest: "{{ hockeypuck_directory }}"
+    version: master
+    update: yes
+  become_user: hockeypuck
+- name: install hockeypuck
+  ansible.builtin.command:
+    argv:
+      - "/opt/go/{{ golang_version }}/bin/go"
+      - install
+      - -ldflags
+      - "-X hockeypuck/server.Version=2.1.0-166-geb2a11b -X hockeypuck/server.BuiltAt=2022-08-19T16:03:53+00:00"
+      - "{{ item }}"
+    chdir: "{{ hockeypuck_directory }}/src/hockeypuck"
+  become_user: hockeypuck
+  environment:
+    GOPATH: "{{ hockeypuck_home }}"
+  loop:
+    - hockeypuck/server/cmd/hockeypuck
+    - hockeypuck/server/cmd/hockeypuck-dump
+    - hockeypuck/server/cmd/hockeypuck-load
+    - hockeypuck/server/cmd/hockeypuck-pbuild
+  notify: restart hockeypuck
+
+- name: install hockeypuck configuration
+  template:
+    src: hockeypuck.conf.j2
+    dest: /etc/hockeypuck/hockeypuck.conf
+    owner: root
+    group: hockeypuck
+    mode: '0750'
+  notify: restart hockeypuck
+
+- name: create hockeypuck systemd service
+  template:
+    src: hockeypuck.service.j2
+    dest: /etc/systemd/system/hockeypuck.service
+    mode: '0644'
+    owner: root
+    group: root
+  register:
+    __hockeypuck_systemd_service_file
+- name: reload systemd if necessary
+  systemd:
+    daemon_reload: yes
+  when: __hockeypuck_systemd_service_file.changed
+# can't use a handler here, as we need the daemon reload now
+- name: enable hockeypuck service
+  systemd:
+    name: hockeypuck.service
+    enabled: yes
+    state: started
+
+- name: install logrotate configuration
+  ansible.builtin.copy:
+    src: logrotate
+    dest: /etc/logrotate.d/
+    mode: '0755'
+    owner: root
+    group: root

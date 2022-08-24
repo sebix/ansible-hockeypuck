@@ -1,2 +1,8 @@
+# SPDX-FileCopyrightText: 2022 Intevation GmbH
 ---
-# tasks file for hockeypuck
+- import_tasks: database.yml
+  tags:
+    - hockeypuck
+- import_tasks: hockeypuck.yml
+  tags:
+    - hockeypuck

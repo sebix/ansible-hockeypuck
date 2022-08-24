@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2022 Intevation GmbH
+
+/var/log/hockeypuck/*.log {
+	daily
+	missingok
+	rotate 7
+	compress
+	delaycompress
+	notifempty
+	size 50M
+	postrotate
+		/usr/bin/systemctl reload hockeypuck
+	endscript
+}

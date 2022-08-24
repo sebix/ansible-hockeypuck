@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2022 Intevation GmbH
+
+[Unit]
+Description=Hockeypuck PGP server
+After=networking.target
+
+[Service]
+Type=exec
+ExecStart={{ hockeypuck_home }}/bin/hockeypuck -config /etc/hockeypuck/hockeypuck.conf
+ExecReload=/bin/kill -USR1 $MAINPID
+LimitNOFILE=49152
+Environment=HOME={{ hockeypuck_home }}
+User=hockeypuck
+
+[Install]
+WantedBy=multi-user.target

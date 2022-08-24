@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: hockeypuck
   author: Sebastian Wagner
   description: Installing and setting up the Hockeypuck OpenPGP key server
   company: Intevation GmbH

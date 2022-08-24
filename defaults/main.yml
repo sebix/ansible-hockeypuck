@@ -1,2 +1,14 @@
+# SPDX-FileCopyrightText: 2022 Intevation GmbH
 ---
-# defaults file for hockeypuck
+hockeypuck_home: /var/lib/hockeypuck
+hockeypuck_directory: "{{ hockeypuck_home }}/hockeypuck/"
+hockeypuck_hostname: "{{ hostname }}"
+hockeypuck_templates: "{{ hockeypuck_directory }}/contrib/templates"
+hockeypuck_index_template: "{{ hockeypuck_templates }}/index.html.tmpl"
+hockeypuck_vindex_template: "{{ hockeypuck_templates }}/index.html.tmpl"
+hockeypuck_stats_template: "{{ hockeypuck_templates }}/stats.html.tmpl"
+hockeypuck_webroot: "{{ hockeypuck_directory }}/contrib/webroot/"
+hockeypuck_logfile: /var/log/hockeypuck/hockeypuck.log
+hockeypuck_loglevel: INFO
+hockeypuck_recondb: "{{ hockeypuck_home }}/recon.db"
+hockeypuck_log_request_details: "true"

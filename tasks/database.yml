@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2022 Intevation GmbH
+# https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html
+# psycopg2 is required for ansible itself
+---
+- name: install postgresql and psycopg2
+  package:
+    name: "{{ item }}"
+  loop:
+    - postgresql-all
+    - python3-psycopg2
+
+- name: create hockeypuck postgresql database
+  community.postgresql.postgresql_db:
+    name: hockeypuck
+    login_unix_socket: /var/run/postgresql/
+  become_user: postgres
+  vars:
+      # if ansible_become is set to no
+    ansible_become: yes
+- name: create hockeypuck postgresql user
+  community.postgresql.postgresql_user:
+    name: hockeypuck
+    login_unix_socket: /var/run/postgresql/
+  become_user: postgres
+  vars:
+      # if ansible_become is set to no
+    ansible_become: yes
