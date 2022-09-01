@@ -94,7 +94,7 @@
 - name: install logrotate configuration
   ansible.builtin.copy:
     src: logrotate
-    dest: /etc/logrotate.d/
+    dest: /etc/logrotate.d/hockeypuck
     mode: '0644'
     owner: root
     group: root
