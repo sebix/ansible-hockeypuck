@@ -24,7 +24,7 @@ trap print_error ERR
 
 pushd $WORKDIR
 if [[ -n $RSYNC && -x $RSYNC ]]; then
-    rsync -avr rsync://rsync.cyberbits.eu/sks/dump/ $WORKDIR
+    rsync -avr --exclude '*.psql' rsync://rsync.cyberbits.eu/sks/dump/ $WORKDIR
 elif [[ -n $RSYNC && -x $WGET ]]; then
     wget -rc -e robots=off -np -nd -A pgp,txt,SHA256SUMS https://mirror.cyberbits.eu/sks/dump/
 else
