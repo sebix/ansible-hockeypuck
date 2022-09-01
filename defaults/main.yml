@@ -14,3 +14,5 @@ hockeypuck_loglevel: INFO
 hockeypuck_recondb: "{{ hockeypuck_home }}/recon.db"
 hockeypuck_log_request_details: "true"
 hockeypuck_sks_import_temporary_directory: /tmp
+hockeypuck_peers: []
+hockeypuck_blacklist: []

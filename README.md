@@ -31,6 +31,7 @@ hockeypuck_loglevel: INFO
 hockeypuck_recondb: "{{ hockeypuck_home }}/recon.db"
 hockeypuck_log_request_details: "true"
 hockeypuck_peers: []
+hockeypuck_blacklist: []
 ```
 
 ### Peers
@@ -51,6 +52,18 @@ Or, `hockeypuck_peers` can be a mapping:
   recon_addr: 11370
 ```
 The ports are optional.
+
+### Key Blacklisting
+
+Keys can be [blacklisted](https://github.com/hockeypuck/hockeypuck/issues/79#issuecomment-735447403) with the `hockeypuck_blacklist` option with one fingerprint per list item:
+
+```yaml
+hockeypuck_blacklist:
+  - B4530375102C9EB270909C9C006694EB
+  - a490d0f4d311a4153e2bb7cadbb802b258acd84f
+```
+
+For an existing useful blacklist, have a look at [CIRCL's openpgp-keys-filterlists](https://github.com/CIRCL/openpgp-keys-filterlists).
 
 Dependencies
 ------------

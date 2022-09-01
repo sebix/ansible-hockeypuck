@@ -26,10 +26,9 @@ maxKeyLength=1048576
 maxPacketLength=8192
 {% if hockeypuck_blacklist is defined and hockeypuck_blacklist -%}
 blacklist=[
-{% for key in hockeypuck_blacklist
-  "2790943722612cf8d9c2db9213de25eed1bb5151",
-  "a490d0f4d311a4153e2bb7cadbb802b258acd84f",
-  "5c738727ee58786a777c4f1db5aa3fa3486ed7ad",
+{% for key in hockeypuck_blacklist %}
+  "{{ key }}",
+{% endfor -%}
 ]
 {% endif %}
 
