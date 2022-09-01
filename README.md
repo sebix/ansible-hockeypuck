@@ -44,8 +44,6 @@ which assumes the same address for http and recon, as well as the default ports 
 
 Or, `hockeypuck_peers` can be a mapping:
 ```yaml
-- name: simple example
-  host: example.com
 - name: full example
   http_addr: example.net
   http_addr_port: 11371
