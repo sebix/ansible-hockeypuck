@@ -78,8 +78,7 @@
     mode: '0644'
     owner: root
     group: root
-  register:
-    __hockeypuck_systemd_service_file
+  register: __hockeypuck_systemd_service_file
 - name: reload systemd if necessary
   systemd:
     daemon_reload: yes
