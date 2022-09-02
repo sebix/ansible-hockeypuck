@@ -31,6 +31,8 @@ else
     echo "Neither wget nor rsync is installed. Install either of them. Exiting."
     exit 2;
 fi
+sed -i '/hockeypuck.psql/d' SHA256SUMS
+
 $SHA256SUM --strict -c SHA256SUMS
 popd
 
