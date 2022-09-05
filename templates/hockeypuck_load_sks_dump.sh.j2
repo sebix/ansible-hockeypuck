@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: 2022 Intevation GmbH
 # SPDX-License-Identifier: BSD-3-Clause
 
+# https://hockeypuck.io/populating.html
 # https://github.com/SKS-Keyserver/sks-keyserver/wiki/KeydumpSources
 
 RSYNC=$(which rsync)
@@ -9,6 +10,7 @@ WGET=$(which wget)
 SUDO=$(which sudo)
 SU=$(which su)
 HOCKEYPUCK_LOAD={{ hockeypuck_home }}/bin/hockeypuck-load
+HOCKEYPUCK_PBUILD={{ hockeypuck_home }}/bin/hockeypuck-pbuild
 SHA256SUM=$(which sha256sum)
 MKTEMP=$(which mktemp)
 
@@ -39,8 +41,10 @@ popd
 systemctl stop hockeypuck.service
 if [[ -n $SUDO && -x $SUDO ]]; then
     $SUDO -u hockeypuck $HOCKEYPUCK_LOAD -config /etc/hockeypuck/hockeypuck.conf $WORKDIR/hkp-dump-*.pgp
+    $SUDO -u hockeypuck $HOCKEYPUCK_PBUILD -config /etc/hockeypuck/hockeypuck.conf
 else
     $SU - hockeypuck -c "$HOCKEYPUCK_LOAD -config /etc/hockeypuck/hockeypuck.conf $WORKDIR/hkp-dump-*.pgp"
+    $SU - hockeypuck -c "$HOCKEYPUCK_PBUILD -config /etc/hockeypuck/hockeypuck.conf"
 fi
 
 systemctl start hockeypuck.service
