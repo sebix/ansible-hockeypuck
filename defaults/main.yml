@@ -16,3 +16,4 @@ hockeypuck_log_request_details: "true"
 hockeypuck_sks_import_temporary_directory: /tmp
 hockeypuck_peers: []
 hockeypuck_blacklist: []
+hockeypuck_conflux_recon_allowCIDRs: []

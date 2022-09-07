@@ -32,6 +32,7 @@ hockeypuck_recondb: "{{ hockeypuck_home }}/recon.db"
 hockeypuck_log_request_details: "true"
 hockeypuck_peers: []
 hockeypuck_blacklist: []
+hockeypuck_conflux_recon_allowCIDRs: []
 ```
 
 ### Peers
@@ -52,6 +53,13 @@ Or, `hockeypuck_peers` can be a mapping:
   recon_addr: 11370
 ```
 The ports are optional.
+
+If the hockeypuck server is behind a reverse proxy, set `hockeypuck_conflux_recon_allowCIDRs` to the IP address of the proxy. Hockeypuck only allows incoming recon from configured peers and this list of allowed network ranges.
+```yaml
+hockeypuck_conflux_recon_allowCIDRs:
+  - 10.0.0.1/8
+  - 192.168.0.1/32
+```
 
 ### Key Blacklisting
 
