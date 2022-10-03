@@ -3,7 +3,7 @@
 
 [Unit]
 Description=Hockeypuck PGP server
-After=networking.target
+After=networking.target postgresql.service
 Requires=postgresql.service
 
 [Service]
