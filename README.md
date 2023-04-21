@@ -33,6 +33,7 @@ hockeypuck_log_request_details: "true"
 hockeypuck_peers: []
 hockeypuck_blacklist: []
 hockeypuck_conflux_recon_allowCIDRs: []
+hockeypuck_hkp_bind: :11371
 ```
 
 ### Peers
