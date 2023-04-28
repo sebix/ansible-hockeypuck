@@ -33,6 +33,7 @@ hockeypuck_log_request_details: "true"
 hockeypuck_peers: []
 hockeypuck_blacklist: []
 hockeypuck_conflux_recon_allowCIDRs: []
+hockeypuck_conflux_recon_seenCacheSize: 72000
 hockeypuck_hkp_bind: :11371
 ```
 

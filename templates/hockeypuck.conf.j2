@@ -36,11 +36,14 @@ blacklist=[
 driver="postgres-jsonb"
 dsn="database=hockeypuck user=hockeypuck host=/var/run/postgresql port=5432 sslmode=disable"
 
-{% if hockeypuck_conflux_recon_allowCIDRs is defined and hockeypuck_conflux_recon_allowCIDRs %}
 [hockeypuck.conflux.recon]
+{% if hockeypuck_conflux_recon_allowCIDRs is defined and hockeypuck_conflux_recon_allowCIDRs %}
 allowCIDRs=["{{ '", "'.join(hockeypuck_conflux_recon_allowCIDRs) }}"]
-
 {% endif %}
+{% if hockeypuck_conflux_recon_seenCacheSize is defined and hockeypuck_conflux_recon_seenCacheSize %}
+seenCacheSize={{ hockeypuck_conflux_recon_seenCacheSize }}
+{% endif %}
+
 [hockeypuck.conflux.recon.leveldb]
 path="{{ hockeypuck_recondb }}"
 {% if hockeypuck_peers is defined and hockeypuck_peers %}
