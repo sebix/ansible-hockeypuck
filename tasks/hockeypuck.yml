@@ -38,7 +38,7 @@
   git:
     repo: https://github.com/hockeypuck/hockeypuck
     dest: "{{ hockeypuck_directory }}"
-    version: master
+    version: "{{ hockeypuck_git_version }}"
     update: yes
   become_user: hockeypuck
 # we cannot reliably determine when we need to rebuild hockeypuck, so just do it always, it's very quick
