@@ -20,7 +20,7 @@ List of variables with their defaults:
 ```yaml
 hockeypuck_home: /var/lib/hockeypuck
 hockeypuck_directory: "{{ hockeypuck_home }}/hockeypuck/"
-hockeypuck_hostname: "{{ hostname }}"
+hockeypuck_hostname: "{{ hostname|d(ansible_hostname)|d(inventory_hostname) }}"
 hockeypuck_templates: "{{ hockeypuck_directory }}/contrib/templates"
 hockeypuck_index_template: "{{ hockeypuck_templates }}/index.html.tmpl"
 hockeypuck_vindex_template: "{{ hockeypuck_templates }}/index.html.tmpl"
@@ -37,6 +37,14 @@ hockeypuck_conflux_recon_seenCacheSize: 72000
 hockeypuck_hkp_bind: :11371
 hockeypuck_git_version: master
 ```
+
+### Hostname
+The hostname is used to name the host of the hockeypuck instance in the configuration file.
+
+If the user-defined variable `hockeypuck_hostname` is not defined,
+- the user-defined variable `hostname` is used. If that is not defined,
+- `ansible_hostname` is used, which requires [gathered facts](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/gather_facts_module.html). If facts are not gathered,
+- `inventory_hostname` is used as fallback, which is always defined.
 
 ### Peers
 
