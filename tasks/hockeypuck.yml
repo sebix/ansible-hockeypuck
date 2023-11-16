@@ -41,6 +41,13 @@
     version: "{{ hockeypuck_git_version }}"
     update: yes
   become_user: hockeypuck
+- name: read version from git
+  ansible.builtin.command:
+    argv:
+      - git
+      - describe
+    chdir: "{{ hockeypuck_directory }}"
+  register: hockeypuck_git_describe
 # we cannot reliably determine when we need to rebuild hockeypuck, so just do it always, it's very quick
 # one possibility is to check the return values of above task, but that does not cover local changes
 - name: install hockeypuck
@@ -49,7 +56,7 @@
       - "/opt/go/{{ golang_version }}/bin/go"
       - install
       - -ldflags
-      - "-X hockeypuck/server.Version=2.1.0-166-geb2a11b -X hockeypuck/server.BuiltAt=2022-08-19T16:03:53+00:00"
+      - "-X hockeypuck/server.Version={{ hockeypuck_git_describe.stdout|trim }} -X hockeypuck/server.BuiltAt={{ _hockeypuck_build_time }}"
       - "{{ item }}"
     chdir: "{{ hockeypuck_directory }}/src/hockeypuck"
   become_user: hockeypuck
@@ -61,7 +68,8 @@
     - hockeypuck/server/cmd/hockeypuck-load
     - hockeypuck/server/cmd/hockeypuck-pbuild
   notify: restart hockeypuck
-
+  vars:
+    _hockeypuck_build_time: "{{ '%Y-%m-%dT%H:%M:%S%z' | strftime }}"
 - name: install hockeypuck configuration
   template:
     src: hockeypuck.conf.j2
