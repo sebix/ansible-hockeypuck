@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Intevation GmbH
+# SPDX-FileCopyrightText: 2022 Intevation GmbH, 2023-2024 Institute for Common Good Technology
 # SPDX-License-Identifier: BSD-3-Clause
 ---
 - name: install gcc
@@ -48,6 +48,9 @@
       - describe
     chdir: "{{ hockeypuck_directory }}"
   register: hockeypuck_git_describe
+- name: show version read from git
+  debug:
+    msg: "{{ hockeypuck_git_describe.stdout|trim }}"
 # we cannot reliably determine when we need to rebuild hockeypuck, so just do it always, it's very quick
 # one possibility is to check the return values of above task, but that does not cover local changes
 - name: install hockeypuck
