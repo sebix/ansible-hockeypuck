@@ -35,7 +35,7 @@ hockeypuck_blacklist: []
 hockeypuck_conflux_recon_allowCIDRs: []
 hockeypuck_conflux_recon_seenCacheSize: 72000
 hockeypuck_hkp_bind: :11371
-hockeypuck_git_version: master
+hockeypuck_git_version: branch-2.1
 ```
 
 ### Hostname
