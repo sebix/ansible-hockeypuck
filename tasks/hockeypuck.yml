@@ -16,7 +16,7 @@
     group: hockeypuck
     password: "!"
     home: "{{ hockeypuck_home }}"
-    system: yes
+    system: true
     update_password: on_create
 
 - name: create hockeypuck logging directory
@@ -39,7 +39,7 @@
     repo: https://github.com/hockeypuck/hockeypuck
     dest: "{{ hockeypuck_directory }}"
     version: "{{ hockeypuck_git_version }}"
-    update: yes
+    update: true
   become_user: hockeypuck
 - name: read version from git
   ansible.builtin.command:
@@ -92,13 +92,13 @@
   register: __hockeypuck_systemd_service_file
 - name: reload systemd if necessary
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
   when: __hockeypuck_systemd_service_file.changed
 # can't use a handler here, as we need the daemon reload now
 - name: enable hockeypuck service
   systemd:
     name: hockeypuck.service
-    enabled: yes
+    enabled: true
     state: started
 
 - name: install logrotate configuration

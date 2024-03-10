@@ -15,13 +15,13 @@
     login_unix_socket: /var/run/postgresql/
   become_user: postgres
   vars:
-      # if ansible_become is set to no
-    ansible_become: yes
+    # if ansible_become is set to no
+    ansible_become: true
 - name: create hockeypuck postgresql user
   community.postgresql.postgresql_user:
     name: hockeypuck
     login_unix_socket: /var/run/postgresql/
   become_user: postgres
   vars:
-      # if ansible_become is set to no
-    ansible_become: yes
+    # if ansible_become is set to no
+    ansible_become: true
