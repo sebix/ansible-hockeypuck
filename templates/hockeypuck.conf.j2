@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Intevation GmbH
+# SPDX-FileCopyrightText: 2022 Intevation GmbH, 2023-2024 Institute for Common Good Technology
 # SPDX-License-Identifier: BSD-3-Clause
 
 [hockeypuck]
@@ -17,6 +17,12 @@ hostname="{{ hockeypuck_hostname }}"
 bind="{{ hockeypuck_hkp_bind }}"
 logRequestDetails={{ hockeypuck_log_request_details }}
 
+{% if hockeypuck_hkp_ssl_enabled %}
+[hockeypuck.hkps]
+cert="{{ hockeypuck_hkp_ssl_certificate }}"
+key="{{ hockeypuck_hkp_ssl_key }}"
+
+{% endif %}
 [hockeypuck.hkp.queries]
 selfSignedOnly=false
 keywordSearchDisabled=false

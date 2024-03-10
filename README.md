@@ -37,6 +37,9 @@ hockeypuck_conflux_recon_seenCacheSize: 72000
 hockeypuck_hkp_bind: :11371
 hockeypuck_git_version: branch-2.1
 hockeypuck_contact: # no default
+hockeypuck_hkp_ssl_enabled: false
+hockeypuck_hkp_ssl_certificate: # no default
+hockeypuck_hkp_ssl_key: # no default
 ```
 
 ### Hostname
@@ -46,6 +49,15 @@ If the user-defined variable `hockeypuck_hostname` is not defined,
 - the user-defined variable `hostname` is used. If that is not defined,
 - `ansible_hostname` is used, which requires [gathered facts](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/gather_facts_module.html). If facts are not gathered,
 - `inventory_hostname` is used as fallback, which is always defined.
+
+### HKPS/SSL/TLS
+
+To enable HKPS, set the enable parameter and give the paths to certificate and private key as follows:
+```
+hockeypuck_hkp_ssl_enabled: true
+hockeypuck_hkp_ssl_certificate: "/path/to/cerificate"
+hockeypuck_hkp_ssl_key: "/path/to/private/key"
+```
 
 ### Peers
 
