@@ -25,3 +25,12 @@
   vars:
     # if ansible_become is set to no
     ansible_become: true
+- name: grant permission for hockeypuck user
+  community.postgresql.postgresql_privs:
+    type: schema
+    objs: public
+    login_db: hockeypuck
+    privs: ALL
+    roles: hockeypuck
+  become_user: postgres
+  become: true
