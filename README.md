@@ -40,6 +40,7 @@ hockeypuck_contact: # no default
 hockeypuck_hkp_ssl_enabled: false
 hockeypuck_hkp_ssl_certificate: # no default
 hockeypuck_hkp_ssl_key: # no default
+hockeypuck_service_restart: false
 ```
 
 ### Hostname
@@ -96,6 +97,10 @@ hockeypuck_blacklist:
 ```
 
 For an existing useful blacklist, have a look at [CIRCL's openpgp-keys-filterlists](https://github.com/CIRCL/openpgp-keys-filterlists).
+
+### Service
+
+`hockeypuck_service_restart` can be set to true to always restart the service with systemd if the hockeypuck process exits
 
 Dependencies
 ------------

@@ -13,6 +13,9 @@ ExecReload=/bin/kill -USR1 $MAINPID
 LimitNOFILE=49152
 Environment=HOME={{ hockeypuck_home }}
 User=hockeypuck
+{% if hockeypuck_service_restart %}
+Restart=always
+{% endif %}
 
 [Install]
 WantedBy=multi-user.target
