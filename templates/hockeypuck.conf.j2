@@ -24,8 +24,9 @@ key="{{ hockeypuck_hkp_ssl_key }}"
 
 {% endif %}
 [hockeypuck.hkp.queries]
-selfSignedOnly=false
-keywordSearchDisabled=false
+selfSignedOnly={{ hockeypuck_queries_selfsigned }}
+keywordSearchDisabled={{ hockeypuck_queries_keyworddisabled }}
+enableInexact={{ hockeypuck_queries_enableinexact }}
 
 [hockeypuck.openpgp]
 maxKeyLength=1048576
