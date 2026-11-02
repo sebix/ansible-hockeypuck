@@ -41,6 +41,10 @@ hockeypuck_hkp_ssl_enabled: false
 hockeypuck_hkp_ssl_certificate: # no default
 hockeypuck_hkp_ssl_key: # no default
 hockeypuck_service_restart: false
+# configuration for hockeypuck.hkp.queries
+hockeypuck_queries_selfsigned: "false"
+hockeypuck_queries_keyworddisabled: "false"
+hockeypuck_queries_enableinexact: "false"
 ```
 
 ### Hostname
